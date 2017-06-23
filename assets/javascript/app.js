@@ -36,9 +36,9 @@ var database = firebase.database();
 
 
 $(document).ready(function() {
- // AJAX calls
+  // AJAX calls
   var getOfficialIdAndInfo = function(stateAbr) {
-    queryURL = "http://www.opensecrets.org/api/?method=getLegislators&id=" + stateAbr +"&output=json&apikey=a71e46d929b085eda4974bae83338ee6";
+    queryURL = "http://www.opensecrets.org/api/?method=getLegislators&id=" + stateAbr + "&output=json&apikey=a71e46d929b085eda4974bae83338ee6";
     $.ajax({
       url: queryURL,
       method: 'GET',
@@ -47,3 +47,4 @@ $(document).ready(function() {
     });
   };
   getOfficialIdAndInfo('CO');
+}

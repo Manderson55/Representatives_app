@@ -21,7 +21,7 @@ var ElectedOfficial ={
 // Creating new instance of an elected official
  var rep = Object.create(ElectedOfficial);
 
-// Firebase
+//Firebase
 var config = {
   apiKey: "AIzaSyCi-dzO9wATSlwXs5EJCzBMvKjGflTy850",
   authDomain: "voterapp-839b2.firebaseapp.com",
@@ -34,4 +34,16 @@ firebase.initializeApp(config);
 
 var database = firebase.database();
 
-$(document).ready(function() {})
+
+$(document).ready(function() {
+ // AJAX calls
+  var getOfficialIdAndInfo = function(stateAbr) {
+    queryURL = "http://www.opensecrets.org/api/?method=getLegislators&id=" + stateAbr +"&output=json&apikey=a71e46d929b085eda4974bae83338ee6";
+    $.ajax({
+      url: queryURL,
+      method: 'GET',
+    }).done(function(response) {
+      console.log(response);
+    });
+  };
+  getOfficialIdAndInfo('CO');

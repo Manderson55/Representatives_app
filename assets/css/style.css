@@ -42,3 +42,11 @@ footer {
     text-align: center;
 }
 
+@media(max-width:600px) {
+    section {
+        padding-top: 25px;
+        padding-bottom: 25px;
+    }
+
+}
+

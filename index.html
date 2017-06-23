@@ -5,7 +5,7 @@
 
     <meta charset="UTF-8">
     <title>Your Representatives</title>
-    
+
     <!-- Bootstrap -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
@@ -15,7 +15,18 @@
 
     <!-- App Styles & JS -->
     <link rel="stylesheet" href="assets/css/style.css">
-    <script type="text/javascript" src="assets/javascript/app.js"></script>
+    <script type="text/javascript" src="assets/javascript/app.js">
+//var queryURL = "https://www.googleapis.com/civicinfo/v2/representatives?key=AIzaSyDI1kvAcYil3IZ4Tkt2BiZ4NWUJHfOpYoo&address=" + streetNumber + "%20" + streetName + "%20" + city + "%20" + state + "&roles=legislatorUpperBody&roles=legislatorLowerBody"
+  
+    var queryURL = "https://www.googleapis.com/civicinfo/v2/representatives?key=AIzaSyDI1kvAcYil3IZ4Tkt2BiZ4NWUJHfOpYoo&address=9501%20Hackamore%2Ct%20Justin%20TX&roles=legislatorUpperBody&roles=legislatorLowerBody"
+
+      $.ajax({
+        url: queryURL,
+        method: "GET"
+        }).done(function(response) {
+        console.log(response);
+      });
+</script>
 
   </head>
 
@@ -60,7 +71,7 @@
             <div class="row">
                 <div class="col-lg-6" id = "formArea">
                     <h2 class="section-heading">Your Information</h2>
-   
+
                     <p class="section-paragraph">Please enter your name and complete street address, with city, state and zip code (Apartment numbers/units not necessary)</p>
 
                     <form id="voterAddress" data-toggle= "validator" role = "form">
@@ -91,9 +102,9 @@
                         <div class="form-group col-md-8">
                             <label for="city">City</label>
                             <div class="input-group" >
-                                <span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>                        
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
                                 <input class="form-control" id="city" type="text" data-minlength="3" required>
-                                <div class="help-block with-errors"></div> 
+                                <div class="help-block with-errors"></div>
                             </div>
                         </div>
                         <div class="form-group col-md-8">
@@ -104,28 +115,28 @@
                                   <option></option>
                                   <option>AL</option>
                                   <option>AK</option>
-                                  <option >AZ</option>
-                                  <option >AR</option>
-                                  <option >CA</option>
-                                  <option >CO</option>
-                                  <option >CT</option>
-                                  <option >DE</option>
-                                  <option >DC</option>
+                                  <option>AZ</option>
+                                  <option>AR</option>
+                                  <option>CA</option>
+                                  <option>CO</option>
+                                  <option>CT</option>
+                                  <option>DE</option>
+                                  <option>DC</option>
                                   <option>FL</option>
-                                  <option >GA</option>
-                                  <option >HI</option>
-                                  <option >ID</option>
-                                  <option >IL</option>
-                                  <option >IN</option>
-                                  <option >IA</option>
-                                  <option> KS</option>
-                                  <option >KY</option>
-                                  <option >LA</option>
+                                  <option>GA</option>
+                                  <option>HI</option>
+                                  <option>ID</option>
+                                  <option>IL</option>
+                                  <option>IN</option>
+                                  <option>IA</option>
+                                  <option>KS</option>
+                                  <option>KY</option>
+                                  <option>LA</option>
                                   <option>MA</option>
-                                  <option >MD</option>
+                                  <option>MD</option>
                                   <option>MA</option>
-                                  <option >MI</option>
-                                  <option >MN</option>
+                                  <option>MI</option>
+                                  <option>MN</option>
                                   <option>MS</option>
                                   <option>MO</option>
                                   <option>MT</option>
@@ -149,22 +160,22 @@
                                   <option>UT</option>
                                   <option>VT</option>
                                   <option>VA</option>
-                                  <option >WA</option>
-                                  <option >WV</option>
+                                  <option>WA</option>
+                                  <option>WV</option>
                                   <option>WI</option>
-                                  <option >WY</option>
+                                  <option>WY</option>
                                 </select>
                                 <div class="help-block with-errors"></div>
-                            </div> 
+                            </div>
                         </div>
                         <div class="form-group col-md-8">
                             <label for="zipCode">Zip Code</label>
                             <div class="input-group">
-                                <span class="input-group-addon"><i class="glyphicon glyphicon-ok"></i></span>                        
-                                <input class="form-control" id="zipCode" type="number" data-minlength="5" required> 
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-ok"></i></span>
+                                <input class="form-control" id="zipCode" type="number" data-minlength="5" required>
                                 <div class="help-block with-errors"></div>
                             </div>
-                        </div> 
+                        </div>
                        <div class="form-group col-md-8">
                              <button class="btn btn-primary" id="submitAddress" type="submit">Submit</button>
                         </div>
@@ -175,15 +186,15 @@
                 <div class="col-lg-6" id = "resultsArea">
 
                     <h2 class="section-heading">Your Results</h2>
-   
+
                     <p class="section-paragraph">Here is the information you need to have your voice heard in the next election!</p>
-        
+
                 </div> <!-- end of second 6 columns results area -->
 
             </div> <!-- end of section row -->
-  
+
         </div> <!-- end of section container -->
-    
+
 
     </section>
 
@@ -203,12 +214,5 @@
         </div>
         <!-- /.container -->
     </footer>
-
-  
-
-
-
-
-
-
   </body>
+</html>

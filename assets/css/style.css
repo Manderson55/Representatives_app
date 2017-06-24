@@ -69,6 +69,14 @@ section {
     border-radius: 200px;
 }
 
+.alignLeft {
+  text-align: left;
+}
+
+.legalFormat {
+  padding: 0 60px;
+}
+
 a {
     color: yellow;
 

@@ -76,3 +76,12 @@ $(document).ready(function() {
   // Calling Open Secret API for example
   //getOfficialIdForOS('CO');
 });
+
+industry_name
+pacs
+total
+total
+spent
+cash_on_hand
+debt
+origin

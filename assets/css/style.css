@@ -98,3 +98,11 @@ a {
   opacity: 1;
   right: 0;
 }
+@media(max-width:600px) {
+    section {
+        padding-top: 25px;
+        padding-bottom: 25px;
+    }
+
+}
+

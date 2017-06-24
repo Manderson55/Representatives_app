@@ -10,6 +10,8 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Varela+Round|Work+Sans" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Work+Sans" rel="stylesheet">
     <!-- Firebase - -->
 
 
@@ -19,7 +21,7 @@
 
   </head>
 
-  <body>
+<body>
          <div class="container">
 
             <div class="navbar-header">
@@ -32,7 +34,7 @@
                 <a class="navbar-brand" href="#">The Bytemes</a>
             </div> <!-- end navbar-header -->
 
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <div class="collapse navbar-collapse nav navbar-right" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
                     <li>
                         <a href="#">About Us</a>
@@ -51,20 +53,19 @@
 
     <!--  setting the state flag within the header image -->
     <header class="image-bg-fluid-height">
-        <img class="img-responsive img-center stateFlag" src="assets/images/co.png" alt="State Flag">
+        <iframe src="https://giphy.com/embed/3osxYrgM8gi9CDjcPu" width="480" height="270" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/broadcity-broad-city-ilana-glazer-hail-to-the-kween-3osxYrgM8gi9CDjcPu">via GIPHY</a></p>
     </header>
 
     <!-- Content Section -->
     <section>
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-6" id = "formArea">
-                    <h2 class="section-heading">Your Information</h2>
-   
-                    <p class="section-paragraph">Please enter your name and complete street address, with city, state and zip code (Apartment numbers/units not necessary)</p>
 
+        <div class="container col-md-12">
+          <h2 class="section-heading">Hello!</h2>
+          
+              <p class="section-paragraph"> Do you know what your local Senators and Representatives are up to? To find out, please enter your address (apartment numbers/units not necessary)</p>
+                  <div id="row" id="formBlock">
                     <form id="voterAddress" data-toggle= "validator" role = "form">
-                        <div class="form-group col-md-8">
+                        <div class="form-group col-md-8 col-md-offset-2">
                             <label for="name">Name</label>
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
@@ -72,7 +73,7 @@
                                 <div class="help-block with-errors"></div> <!-- to display error messages you have to include a container after the input field with both help-block and with-errors classes -->
                             </div>
                         </div>
-                        <div class="form-group col-md-8">
+                        <div class="form-group col-md-8 col-md-offset-2"">
                              <label for="streetNumber">Street Number</label>
                              <div class="input-group">
                                 <span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
@@ -80,7 +81,7 @@
                                 <div class="help-block with-errors"></div>
                             </div>
                         </div>
-                        <div class="form-group col-md-8">
+                        <div class="form-group col-md-8 col-md-offset-2"">
                             <label for="streetName">Street Name</label>
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
@@ -88,7 +89,7 @@
                                 <div class="help-block with-errors"></div>
                             </div>
                         </div>
-                        <div class="form-group col-md-8">
+                        <div class="form-group col-md-8 col-md-offset-2"">
                             <label for="city">City</label>
                             <div class="input-group" >
                                 <span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>                        
@@ -96,7 +97,7 @@
                                 <div class="help-block with-errors"></div> 
                             </div>
                         </div>
-                        <div class="form-group col-md-8">
+                        <div class="form-group col-md-8 col-md-offset-2"">
                             <label for="state">State</label>
                             <div class = "input-group">
                                 <span class="input-group-addon"><i class="glyphicon glyphicon-list"></i></span>
@@ -157,7 +158,7 @@
                                 <div class="help-block with-errors"></div>
                             </div> 
                         </div>
-                        <div class="form-group col-md-8">
+                        <div class="form-group col-md-8 col-md-offset-2"">
                             <label for="zipCode">Zip Code</label>
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="glyphicon glyphicon-ok"></i></span>                        
@@ -165,22 +166,15 @@
                                 <div class="help-block with-errors"></div>
                             </div>
                         </div> 
-                       <div class="form-group col-md-8">
-                             <button class="btn btn-primary" id="submitAddress" type="submit">Submit</button>
+                       <div class="form-group col-md-8 col-md-offset-2">
+                             <button class="btn btn-primary button" id="submitAddress" type="submit"><span>Submit</span></button>
                         </div>
                      </form>
+                    </div>
+                  </div> <!-- end of form container -->
+  
 
-                </div> <!-- end of first 6 columns div form area-->
-
-                <div class="col-lg-6" id = "resultsArea">
-
-                    <h2 class="section-heading">Your Results</h2>
-   
-                    <p class="section-paragraph">Here is the information you need to have your voice heard in the next election!</p>
-        
-                </div> <!-- end of second 6 columns results area -->
-
-            </div> <!-- end of section row -->
+               
   
         </div> <!-- end of section container -->
     
@@ -211,4 +205,4 @@
 
 
 
-  </body>
+</body>

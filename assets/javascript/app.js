@@ -6,17 +6,17 @@
 var myGoogleResponse;
 
 //Firebase
-var config = {
-  apiKey: "AIzaSyCi-dzO9wATSlwXs5EJCzBMvKjGflTy850",
-  authDomain: "voterapp-839b2.firebaseapp.com",
-  databaseURL: "https://voterapp-839b2.firebaseio.com",
-  projectId: "voterapp-839b2",
-  storageBucket: "voterapp-839b2.appspot.com",
-  messagingSenderId: "96769787339"
-};
-firebase.initializeApp(config);
+// var config = {
+//   apiKey: "AIzaSyCi-dzO9wATSlwXs5EJCzBMvKjGflTy850",
+//   authDomain: "voterapp-839b2.firebaseapp.com",
+//   databaseURL: "https://voterapp-839b2.firebaseio.com",
+//   projectId: "voterapp-839b2",
+//   storageBucket: "voterapp-839b2.appspot.com",
+//   messagingSenderId: "96769787339"
+// };
+// firebase.initializeApp(config);
 
-var database = firebase.database();
+// var database = firebase.database();
 
 $(document).ready(function() {
   // AJAX calls
@@ -49,7 +49,29 @@ $(document).ready(function() {
       var mySecondSenator = parseRepInfoFromGoogle(senator2);
       var myHouseRep = parseRepInfoFromGoogle(houseRep);
 
+
+
+$("#submitAddress").on("click", function() {
+      event.preventDefault();
+      $(".senator1Pic").append("<img src='" + response.photoUrl + "'>");
+      $(".senator1Contact").html(website)
+      $(".senator1Contact").append(fb)
+      $(".senator1Contact").append(twitter)
+      $(".senator1Contact").append(youTube)
+      $(".senator1Contact").append(phone)
+      $(".senator1Party").html(party)
+      $(".senator1Last3").html(last3)
+      $(".senator1Top5").html(top5)
+
+      console.log (senator1);
+      
+      // end of on submit event handler
+      });
+
+
+      // end of ajax function
     });
+
   };
 
   // Calling Google API for an example
@@ -71,8 +93,14 @@ $(document).ready(function() {
       phone: rep.phones,
       website: rep.urls[0]
     }
+
+
     return newRep;
   }
   // Calling Open Secret API for example
   //getOfficialIdForOS('CO');
 });
+
+
+
+

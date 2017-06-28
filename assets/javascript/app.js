@@ -1,9 +1,13 @@
 
 // Global variables
- var senator1;
- var senator2;
- var houseRep;
+var myFirstSenator;
+var mySecondSenator;
+var myHouseRep;
 var myGoogleResponse;
+var myFirstOSResponse;
+var repMap;
+var canIdMap;
+var myReps =[];
 
 //Firebase
 var config = {
@@ -20,43 +24,51 @@ var database = firebase.database();
 
 $(document).ready(function() {
   // AJAX calls
-  // var getOfficialIdForOS = function(stateAbr) {
-  //   var queryURL = "http://www.opensecrets.org/api/?method=getLegislators&id=" + stateAbr + "&output=json&apikey=a71e46d929b085eda4974bae83338ee6";
-  //   $.ajax({
-  //     url: queryURL,
-  //     method: 'GET',
-  //   }).done(function(res) {
-  //     console.log(res);
-  //   });
-  // };
 
-  var getGoogleInfo = function(streetNum, streetName, city, state){
-    var queryURL = "https://www.googleapis.com/civicinfo/v2/representatives?key=AIzaSyDI1kvAcYil3IZ4Tkt2BiZ4NWUJHfOpYoo" +
+  var getGeneralRepInfo = function(streetNum, streetName, city, state){
+    var googleQueryURL = "https://www.googleapis.com/civicinfo/v2/representatives?key=AIzaSyDI1kvAcYil3IZ4Tkt2BiZ4NWUJHfOpYoo" +
       "&address="+ streetNum +"%20"+ streetName + "%20"+ city +"%20"+ state + "&roles=legislatorUpperBody&roles=legislatorLowerBody"
 
     $.ajax({
-      url: queryURL,
+      url: googleQueryURL,
       method: "GET"
     }).done(function(response) {
       myGoogleResponse=response;
       // Assigning rep responses to variables
-      senator1 = myGoogleResponse.officials[0]
-      senator2 = myGoogleResponse.officials[1]
-      houseRep = myGoogleResponse.officials[2]
+      var senator1 = myGoogleResponse.officials[0];
+      var senator2 = myGoogleResponse.officials[1];
+      var houseRep = myGoogleResponse.officials[2];
 
-      // Calling parse function for each representative and saving new objects in variables
-      var myFirstSenator = parseRepInfoFromGoogle(senator1);
-      var mySecondSenator = parseRepInfoFromGoogle(senator2);
-      var myHouseRep = parseRepInfoFromGoogle(houseRep);
+      // Calling parseRepInfoFromGoogle() function for each representative and saving new objects in variables
+      myFirstSenator = parseRepInfoFromGoogle(senator1);
+      mySecondSenator = parseRepInfoFromGoogle(senator2);
+      myHouseRep=parseRepInfoFromGoogle(houseRep);
+
+      // Making list of reps
+      var myReps = [myFirstSenator, mySecondSenator, myHouseRep];
+
+      // AJAX call to get the candidate id of each rep, adds it as another property to each rep object
+      var legQueryURL = "http://www.opensecrets.org/api/?method=getLegislators&id=" + state + "&output=json&apikey=a71e46d929b085eda4974bae83338ee6";
+      $.ajax({
+        url: legQueryURL,
+        method: 'GET'
+      }).done(function(res) {
+        myFirstOSResponse= JSON.parse(res);
+        repMap = myFirstOSResponse.map(function(rep) { return rep['@attributes'] });
+        canIdMap = repMap.reduce(function(hash, rep) { hash[rep.firstlast] = rep.cid; return hash }, {});
+        for(var i = 0; i < myReps.length; i++) {
+          if(canIdMap.hasOwnProperty(myReps[i].name)) {
+            myReps[i].cid = canIdMap(myReps[i].name)
+          }
+        }
+      });
 
     });
   };
 
-  // Calling Google API for an example
-  getGoogleInfo("2631", "river dr", "denver", "co");
-
-  // Function to parse info from API resonse and create/return new Rep object
-  parseRepInfoFromGoogle=function(rep){
+  // Function to parse info from API response and create/return new Rep object
+  // Only called INSIDE getGeneralRepInfo function
+  var parseRepInfoFromGoogle=function(rep){
     var newRep = {
       name:rep.name,
       party:rep.party,
@@ -70,9 +82,44 @@ $(document).ready(function() {
       youTube:rep.channels[2].id,
       phone: rep.phones,
       website: rep.urls[0]
-    }
+    };
     return newRep;
-  }
-  // Calling Open Secret API for example
-  //getOfficialIdForOS('CO');
+  };
+
+  var getIndustryDonorsWithCanId=function(cid, rep){
+    var industryDonorUrl = "http://www.opensecrets.org/api/?method=candIndustry&cid="+ cid +"&output=json&cycle=2016&apikey=a71e46d929b085eda4974bae83338ee6";
+
+    $.ajax({
+      url: industryDonorUrl,
+      method: "GET"
+    }).done(function(response) {
+      industryDonorRes =  JSON.parse(response);
+      var industry1 = industryDonorRes.response.industries.industry[0]["@attributes"].industry_name;
+      var industry2 = industryDonorRes.response.industries.industry[1]["@attributes"].industry_name;
+      var industry3 = industryDonorRes.response.industries.industry[1]["@attributes"].industry_name;
+      var topIndustryDonors = [industry1, industry2, industry3];
+      rep.topIndustryDonors = topIndustryDonors;
+    });
+  };
+
+  var getDonorsWithCanId=function(cid, rep){
+    var donorUrl ="http://www.opensecrets.org/api/?method=candContrib&cid=" +cid + "&output=json&cycle=2016&apikey=a71e46d929b085eda4974bae83338ee6";
+
+    $.ajax({
+      url: donorUrl,
+      method: "GET"
+    }).done(function(response) {
+      donorRes =  JSON.parse(response);
+      var donor1 =donorRes.response.contributors.contributor[0]["@attributes"].org_name;
+      var donor2 =donorRes.response.contributors.contributor[1]["@attributes"].org_name;
+      var donor3 =donorRes.response.contributors.contributor[2]["@attributes"].org_name;
+      var topDonors = [donor1, donor2, donor3];
+      rep.topDonors = topDonors;
+    });
+  };
+
+  // Calling API function for an example
+  getGeneralRepInfo("2631", "river dr", "denver", "co");
+  //getIndustryDonorsWithCanId("N00006134");
+  //getDonorsWithCanId("N00006134");
 });
